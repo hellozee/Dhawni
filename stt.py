@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 from wit import Wit
+import os
 
-client = Wit("YVOLR6LO6WZBEVFZX47XTMT4DIDZD7BS")
+client = Wit(os.environ['WIT'])
 resp = None
 with open('test.wav', 'rb') as f:
   resp = client.speech(f, None, {'Content-Type': 'audio/wav'})
