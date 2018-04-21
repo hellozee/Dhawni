@@ -1,7 +1,5 @@
 ABOUT-NLS
 INSTALL
-Makefile
-Makefile.in
 aclocal.m4
 autom4te.cache
 compile
@@ -49,3 +47,4 @@ patch.*
 !/help/C/*.xml
 /help/*/*.mo
 /help/*/*.stamp
+__pycache__
