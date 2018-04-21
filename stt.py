@@ -33,9 +33,9 @@ def say(text):
     	username=os.environ['WATSON_USER'],
     	password=os.environ['WATSON_PASS'])
 
-	with open('output.wav','wb') as audio_file:
+	with open('resources/audio/output.wav','wb') as audio_file:
 		audio_file.write( text_to_speech.synthesize(text, accept='audio/wav',voice="en-US_AllisonVoice").content)
-	play('output.wav')
+	play('resources/audio/output.wav')
 
 def play(filename):
 	import wave, sys, pyaudio
@@ -65,7 +65,7 @@ def record():
 	RATE = 44100
 	CHUNK = 1024
 	RECORD_SECONDS = 3
-	WAVE_OUTPUT_FILENAME = "output.wav"
+	WAVE_OUTPUT_FILENAME = "resources/audio/output.wav"
 
 	audio = pyaudio.PyAudio()
 	
