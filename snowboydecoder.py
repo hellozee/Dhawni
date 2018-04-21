@@ -56,15 +56,17 @@ class RingBuffer(object):
 
 
 def play_audio_file(fname=DETECT_DING):
-    """Simple callback function to play a wave file. By default it plays
-    a Ding sound.
-
-    :param str fname: wave file name
-    :return: None
-    """
     stt.play("resources/audio/yes.wav")
     stt.record()
-    print(stt.gettext("output.wav"))
+    text_string = ""
+    try:
+        text_string = stt.gettext("output.wav")['_text']
+    except Exception as e:
+        stt.play("resources/audio/sure.wav")
+        return
+    print(text_string)
+
+
 
 
 class HotwordDetector(object):

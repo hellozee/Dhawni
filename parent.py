@@ -18,7 +18,7 @@ def interrupt_callback():
 
 
 
-model = 'resources/models/Meowth.pmdl'
+model = 'resources/models/Ava.pmdl'
 
 # capture SIGINT signal, e.g., Ctrl+C
 signal.signal(signal.SIGINT, signal_handler)

@@ -47,3 +47,4 @@ patch.*
 !/help/C/*.xml
 /help/*/*.mo
 /help/*/*.stamp
+__pycache__
