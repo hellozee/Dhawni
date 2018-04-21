@@ -9,6 +9,7 @@ import os
 import logging
 from ctypes import *
 from contextlib import contextmanager
+import stt
 
 logging.basicConfig()
 logger = logging.getLogger("snowboy")
@@ -55,26 +56,17 @@ class RingBuffer(object):
 
 
 def play_audio_file(fname=DETECT_DING):
-    """Simple callback function to play a wave file. By default it plays
-    a Ding sound.
+    stt.play("resources/audio/yes.wav")
+    stt.record()
+    text_string = ""
+    try:
+        text_string = stt.gettext("output.wav")['_text']
+    except Exception as e:
+        stt.play("resources/audio/sure.wav")
+        return
+    print(text_string)
 
-    :param str fname: wave file name
-    :return: None
-    """
-    ding_wav = wave.open(fname, 'rb')
-    ding_data = ding_wav.readframes(ding_wav.getnframes())
-    with no_alsa_error():
-        audio = pyaudio.PyAudio()
-    stream_out = audio.open(
-        format=audio.get_format_from_width(ding_wav.getsampwidth()),
-        channels=ding_wav.getnchannels(),
-        rate=ding_wav.getframerate(), input=False, output=True)
-    stream_out.start_stream()
-    stream_out.write(ding_data)
-    time.sleep(0.2)
-    stream_out.stop_stream()
-    stream_out.close()
-    audio.terminate()
+
 
 
 class HotwordDetector(object):

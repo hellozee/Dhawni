@@ -6,7 +6,7 @@ echo "Do you have a wit.ai API token? [Y/n]"
 read ans;
 if [ $ans = "n" ]; then
 	echo "Make it then"
-	xdg-open wit.ai
+	xdg-open https://www.wit.ai/
 	exit 1
 else
 	echo "What is it?"
