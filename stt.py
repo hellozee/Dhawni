@@ -1,9 +1,23 @@
 #!/usr/bin/python3
 from wit import Wit
+from array import array
 import os
-import talkey
 
 client = Wit(os.environ['WIT'])
+
+
+def normalize(data_all):
+	"""Amplify the volume out to max -1dB"""
+	# MAXIMUM = 16384
+	FRAME_MAX_VALUE = 2 ** 15 - 1
+	NORMALIZE_MINUS_ONE_dB = 10 ** (-1.0 / 20)
+	normalize_factor = (float(NORMALIZE_MINUS_ONE_dB * FRAME_MAX_VALUE)
+                        / max(abs(i) for i in data_all))
+
+	r = array('h')
+	for i in data_all:
+		r.append(int(i * normalize_factor))
+	return r
 
 def gettext(filename):
 	resp = None
@@ -50,7 +64,7 @@ def record():
 	CHANNELS = 2
 	RATE = 44100
 	CHUNK = 1024
-	RECORD_SECONDS = 5
+	RECORD_SECONDS = 3
 	WAVE_OUTPUT_FILENAME = "output.wav"
 
 	audio = pyaudio.PyAudio()
@@ -63,8 +77,8 @@ def record():
 	frames = []
 	 
 	for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-	    data = stream.read(CHUNK)
-	    frames.append(data)
+		data = stream.read(CHUNK)
+		frames.append(data)
 	print ("finished recording")
 	 
 	 

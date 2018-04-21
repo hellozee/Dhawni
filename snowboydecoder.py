@@ -62,10 +62,9 @@ def play_audio_file(fname=DETECT_DING):
     :param str fname: wave file name
     :return: None
     """
-    stt.play('resources/audio/yes.wav')
+    stt.play("resources/audio/yes.wav")
     stt.record()
-    print(stt.gettext('output.wav'))
-
+    print(stt.gettext("output.wav"))
 
 
 class HotwordDetector(object):
