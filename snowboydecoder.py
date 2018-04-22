@@ -10,6 +10,7 @@ import logging
 from ctypes import *
 from contextlib import contextmanager
 import stt
+import new_parser
 
 logging.basicConfig()
 logger = logging.getLogger("snowboy")
@@ -60,11 +61,11 @@ def play_audio_file(fname=DETECT_DING):
     stt.record()
     text_string = ""
     try:
-        text_string = stt.gettext("output.wav")['_text']
+        text_string = stt.gettext("resources/audio/output.wav")['_text']
     except Exception as e:
         stt.play("resources/audio/sure.wav")
         return
-    print(text_string)
+    new_parser.parse(text_string)
 
 
 
