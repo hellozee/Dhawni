@@ -11,6 +11,7 @@ python -m textblob.download_corpora
 
 from textblob import TextBlob
 from textblob.np_extractors import ConllExtractor
+from textblob.sentiments import NaiveBayesAnalyzer
 
 extractor = ConllExtractor()
 #text = "open the browser"
@@ -21,9 +22,11 @@ commands = ['open', 'close', 'play', 'start', 'pause', 'stop', 'increase', 'incr
 actions = ['door', 'browser', 'song', 'music', 'player', 'brightness', 'volume']
 attributes = []
 
-blob = TextBlob(text.lower(), np_extractor=extractor)
+blob = TextBlob(text)
 token_string = blob.words
-mood = token_string.sentiment.polarity
+mood = blob.sentiment.polarity
+print(mood)
+
 e = 0.005 # To set range for the neutral mood.
 
 for index in range(len(token_string)):
@@ -37,14 +40,18 @@ for index in range(len(token_string)):
 				index = ahead + 1
 				if token_string[ahead] == 'brightness' or 'volume':
 					# If Brightness and volume, look for third attribute
-	elif mood in (-1, 0 - e):
-		# Bad mood. Call function to cheer him/her up. Songs/jokes
-		print("Call the mood cheerer man!")
-	elif mood in (0 + e, 1):
-		# happy mood. Say, "looks like you are enjoying your day!"
-		print("Enjoy the party man!")
-	elif token_string.sentiment.polarity in (0 - e, 0 + e):
-		# Neutral sentiment output. Make a pun joke
-	else:
-		# Invalid input. Say, "Can you rephrase your words?"
-		
+					pass
+if -1 <=  mood <= (0 - e):
+	# Bad mood. Call function to cheer him/her up. Songs/jokes
+	print("Call the mood cheerer man!")
+if (0 + e) <=  mood <= 1:
+	# happy mood. Say, "looks like you are enjoying your day!"
+	print("Enjoy the party man!")
+if (0 - e) <=  mood <= (0 + e):
+	# Neutral sentiment output. Make a pun joke
+	print("Neutral Sentiment")
+#else:
+#	# Invalid input. Say, "Can you rephrase your words?"
+#	print("Can you please rephrase your words?")
+	
+
