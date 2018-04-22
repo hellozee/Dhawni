@@ -12,11 +12,6 @@ def volumeDec(percentage):
 		return True
 	return False
 
-def volumeSet(percentage):
-	if os.system("amixer -D pulse sset Master %s\%" %(percentage)):
-		return True
-	return False
-
 def backlightInc(percentage):
 	if os.system("xbacklight -inc %s" %(percentage)):
 		return True
@@ -27,10 +22,6 @@ def backlightDec(percentage):
 		return True
 	return False
 
-def backlightSet(percentage):
-	if os.system("xbacklight -set %s" %(percentage)):
-		return True
-	return False
 
 def openMusicPlayer(name=None):
 	application_desktop = subprocess.Popen(["xdg-mime", "query", "default", "audio/wav"], stdout=subprocess.PIPE).stdout.read()
