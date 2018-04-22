@@ -16,6 +16,5 @@ Assigned to:
 * STT and TTS: Kuntal
 * Sentimental Analysis: Pradhvan
 * Filtering the tokens: philomath
-* 
 
 Pick whatever task seems reasonable to you :)
