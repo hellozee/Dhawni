@@ -3,6 +3,7 @@
 import snowboydecoder
 import sys
 import signal
+import stt
 
 interrupted = False
 
@@ -16,6 +17,7 @@ def interrupt_callback():
     global interrupted
     return interrupted
 
+stt.play("resources/audio/intro.wav")
 
 
 model = 'resources/models/Ava.pmdl'
